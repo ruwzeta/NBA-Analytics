@@ -13,6 +13,7 @@ for year in years:
     dpoy_data = soup.find(id="dpoy")
 
     dpoy_table = pd.read_html(str(dpoy_data))[0]
+    dpoy_table["Year"] = year
     dfs.append(dpoy_table)
     
 dpoy_data = pd.concat(dfs)

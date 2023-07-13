@@ -13,6 +13,7 @@ for year in years:
     mvp_data = soup.find(id="mvp")
 
     mvp_table = pd.read_html(str(mvp_data))[0]
+    mvp_table["Year"] = year
     dfs.append(mvp_table)
     
 mvp_data = pd.concat(dfs)
