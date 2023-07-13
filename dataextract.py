@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 import time
-years = list(range(1976,2023))
+years = list(range(2006,2023))
 
 url_s = "https://www.basketball-reference.com/awards/awards_{}.html"
 

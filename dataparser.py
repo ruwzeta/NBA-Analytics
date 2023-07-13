@@ -4,7 +4,7 @@ import pandas as pd
 
 
 years = list(range(1977,2023))
-
+dfs = []
 for year in years:
     with open("awards/{}.html".format(year),encoding="utf-8") as f: 
         page = f.read()
@@ -13,6 +13,10 @@ for year in years:
     mvp_data = soup.find(id="mvp")
 
     mvp_table = pd.read_html(str(mvp_data))[0]
+    dfs.append(mvp_table)
     
+mvp_data = pd.concat(dfs)
+
+mvp_data.to_csv("mvp_1976on.csv",index=False)
 
 
