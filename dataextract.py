@@ -13,5 +13,4 @@ for year in years:
         f.write(data.text)
 
 
-driver = webdriver.Chrome(executable_path = "D:\Assignments\Python Portfolios\NBA Analytics")
  
