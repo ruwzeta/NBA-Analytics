@@ -82,3 +82,4 @@ chrome-win32/locales/zh-CN.pak
 chrome-win32/locales/zh-TW.pak
 chrome-win32/MEIPreload/manifest.json
 chrome-win32/MEIPreload/preloaded_data.pb
+userinfo.txt
