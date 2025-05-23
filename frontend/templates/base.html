@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NBA Analytics{% endblock %}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4; 
+            color: #333; 
+        }
+        .navbar {
+            background-color: #1a1a2e; /* Dark blue */
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff; /* White text */
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            color: #e94560; /* Pinkish red for hover */
+        }
+        .content-container { 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: #1a1a2e; }
+        h2 { color: #1a1a2e; border-bottom: 2px solid #e94560; padding-bottom: 5px; margin-top: 30px; }
+        table { width: 90%; margin: 20px auto; border-collapse: collapse; box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        thead { background-color: #1a1a2e; color: #fff; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        caption { font-size: 1.2em; margin: 10px; color: #16213e; font-weight: bold;}
+        .plot-container { text-align: center; margin-top: 30px; }
+        .plot-container img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; }
+        .no-data { text-align: center; color: #e94560; margin: 20px; }
+        .filter-note { text-align: center; font-style: italic; color: #555; font-size: 0.9em; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('leaders') }}">League Leaders</a>
+        <a href="{{ url_for('shooting_performance') }}">Shooting Performance</a>
+    </nav>
+    <div class="content-container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

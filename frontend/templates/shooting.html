@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Shooting Performance - NBA Analytics{% endblock %}
+
+{% block content %}
+<h1>NBA Shooting Performance Indicators 2024-2025</h1>
+
+<!-- Top 3P% Shooters -->
+<h2>Top 3-Point Percentage (3P%) Shooters</h2>
+        <p class="filter-note">(Filtered for players with > 50 Total 3PA)</p>
+        {% if shooting_data and shooting_data.top_3p_shooters is not none and not shooting_data.top_3p_shooters.empty %}
+            <table>
+                <caption>Top 10 3P% Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>3P%</th>
+                        <th>Total 3PA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in shooting_data.top_3p_shooters.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ "%.3f"|format(row['3P%']) if row['3P%'] is not none else 'N/A' }}</td>
+                        <td>{{ "%.0f"|format(row['Total_3PA']) if row['Total_3PA'] is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Top 3P% Shooters (or no players met filter criteria).</p>
+        {% endif %}
+
+        <!-- Top FG% 0-3ft -->
+        <h2>Top Field Goal Percentage (FG%) on Shots 0-3 Feet</h2>
+        <p class="filter-note">(Filtered for players with > 30 FGA from 0-3ft)</p>
+        {% if shooting_data and shooting_data.top_fg_0_3 is not none and not shooting_data.top_fg_0_3.empty %}
+            <table>
+                <caption>Top 10 FG% 0-3ft Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>FG% 0-3ft</th>
+                        <th>FGA 0-3ft (Est.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in shooting_data.top_fg_0_3.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ "%.3f"|format(row['FG% 0-3']) if row['FG% 0-3'] is not none else 'N/A' }}</td>
+                        <td>{{ "%.1f"|format(row['FGA_0_3_Attempts']) if row['FGA_0_3_Attempts'] is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Top FG% (0-3ft) (or no players met filter criteria).</p>
+        {% endif %}
+
+        <!-- Top Corner 3P% Shooters -->
+        <h2>Top Corner 3-Point Percentage (3P%) Shooters</h2>
+        <p class="filter-note">(Filtered for players with > 20 Corner 3PA)</p>
+        {% if shooting_data and shooting_data.top_corner_3p is not none and not shooting_data.top_corner_3p.empty %}
+            <table>
+                <caption>Top 10 Corner 3P% Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Corner 3P%</th>
+                        <th>Corner 3PA (Est.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in shooting_data.top_corner_3p.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ "%.3f"|format(row['Corner 3s 3P%']) if row['Corner 3s 3P%'] is not none else 'N/A' }}</td>
+                        <td>{{ "%.1f"|format(row['Corner_3PA_Attempts']) if row['Corner_3PA_Attempts'] is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Top Corner 3P% Shooters (or no players met filter criteria).</p>
+        {% endif %}
+        
+        <!-- Top eFG% Shooters -->
+        <h2>Top Effective Field Goal Percentage (eFG%) Leaders</h2>
+        <p class="filter-note">(Filtered for players with > 100 Total FGA)</p>
+        {% if shooting_data and shooting_data.top_efg is not none and not shooting_data.top_efg.empty %}
+            <table>
+                <caption>Top 10 eFG% Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>eFG%</th>
+                        <th>Total FGA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in shooting_data.top_efg.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ "%.3f"|format(row['eFG%']) if row['eFG%'] is not none else 'N/A' }}</td>
+                        <td>{{ "%.0f"|format(row['Total_FGA']) if row['Total_FGA'] is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Top eFG% Leaders (or no players met filter criteria).</p>
+        {% endif %}
+
+        <!-- Top TS% Shooters -->
+        <h2>Top True Shooting Percentage (TS%) Leaders</h2>
+        <p class="filter-note">(Filtered for players with > 100 Total FGA)</p>
+        {% if shooting_data and shooting_data.top_ts is not none and not shooting_data.top_ts.empty %}
+            <table>
+                <caption>Top 10 TS% Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>TS%</th>
+                        <th>Total FGA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in shooting_data.top_ts.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ "%.3f"|format(row['TS%']) if row['TS%'] is not none else 'N/A' }}</td>
+                        <td>{{ "%.0f"|format(row['Total_FGA']) if row['Total_FGA'] is not none else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Top TS% Leaders (or no players met filter criteria).</p>
+        {% endif %}
+
+        <!-- Average Shot Distance Distribution Plot -->
+        <h2>Average Shot Distance Distribution</h2>
+        <p class="filter-note">(For players with > 10 Games Played)</p>
+        <div class="plot-container">
+            {% if plots and plots.avg_shot_dist_plot %}
+                <img src="data:image/png;base64,{{ plots.avg_shot_dist_plot }}" alt="Average Shot Distance Distribution">
+            {% else %}
+                <p class="no-data">Plot could not be generated or no data available.</p>
+            {% endif %}
+        </div>
+{% endblock %}

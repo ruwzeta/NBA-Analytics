@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - NBA Analytics{% endblock %}
+
+{% block content %}
+<h1>Welcome to the NBA Player Statistics Application!</h1>
+<p style="text-align: center; font-size: 1.2em; margin-top: 20px;">
+    Use the navigation bar above to explore different statistical categories for the 2024-2025 NBA season.
+</p>
+<p style="text-align: center; margin-top: 30px;">
+    <strong>Available Pages:</strong>
+</p>
+<ul style="list-style-type: none; padding: 0; text-align: center;">
+    <li style="margin-bottom: 10px;"><a href="{{ url_for('leaders') }}">League Leaders</a>: View top players in traditional per-game and advanced categories.</li>
+    <li style="margin-bottom: 10px;"><a href="{{ url_for('shooting_performance') }}">Shooting Performance</a>: Analyze detailed shooting statistics and distributions.</li>
+</ul>
+{% endblock %}

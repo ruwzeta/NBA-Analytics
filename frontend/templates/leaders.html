@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}League Leaders - NBA Analytics{% endblock %}
+
+{% block content %}
+<h1>NBA League Leaders 2024-2025</h1>
+
+<!-- Points Per Game Leaders -->
+<h2>Points Per Game (PTS) Leaders</h2>
+        {% if leaderboards and leaderboards.pts_leaders is not none and not leaderboards.pts_leaders.empty %}
+            <table>
+                <caption>Top 10 PTS Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>PTS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in leaderboards.pts_leaders.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ row['PTS'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Points Per Game leaders.</p>
+        {% endif %}
+
+        <!-- Assists Per Game Leaders -->
+        <h2>Assists Per Game (AST) Leaders</h2>
+        {% if leaderboards and leaderboards.ast_leaders is not none and not leaderboards.ast_leaders.empty %}
+            <table>
+                <caption>Top 10 AST Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>AST</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in leaderboards.ast_leaders.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ row['AST'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Assists Per Game leaders.</p>
+        {% endif %}
+
+        <!-- Rebounds Per Game Leaders -->
+        <h2>Total Rebounds Per Game (TRB) Leaders</h2>
+        {% if leaderboards and leaderboards.trb_leaders is not none and not leaderboards.trb_leaders.empty %}
+            <table>
+                <caption>Top 10 TRB Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>TRB</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in leaderboards.trb_leaders.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ row['TRB'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Total Rebounds Per Game leaders.</p>
+        {% endif %}
+
+        <!-- Player Efficiency Rating (PER) Leaders -->
+        <h2>Player Efficiency Rating (PER) Leaders</h2>
+        <p style="text-align:center;">(Filtered for players with substantial playing time)</p>
+        {% if leaderboards and leaderboards.per_leaders is not none and not leaderboards.per_leaders.empty %}
+            <table>
+                <caption>Top 10 PER Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>PER</th>
+                        <th>Filter Criteria (MP_total or G)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in leaderboards.per_leaders.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ row['PER'] }}</td>
+                        <td>{{ row['MP_total'] if 'MP_total' in row else row['G'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Player Efficiency Rating leaders (or no players met filter criteria).</p>
+        {% endif %}
+
+        <!-- Win Shares (WS) Leaders -->
+        <h2>Win Shares (WS) Leaders</h2>
+        <p style="text-align:center;">(Filtered for players with substantial playing time)</p>
+        {% if leaderboards and leaderboards.ws_leaders is not none and not leaderboards.ws_leaders.empty %}
+            <table>
+                <caption>Top 10 WS Leaders</caption>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>WS</th>
+                        <th>Filter Criteria (MP_total or G)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in leaderboards.ws_leaders.iterrows() %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row['Player'] }}</td>
+                        <td>{{ row['Team'] }}</td>
+                        <td>{{ row['WS'] }}</td>
+                        <td>{{ row['MP_total'] if 'MP_total' in row else row['G'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No data available for Win Shares leaders (or no players met filter criteria).</p>
+        {% endif %}
+{% endblock %}
